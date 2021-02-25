@@ -233,5 +233,32 @@ function draw(data) {
 }
 ```
 
+### Move arr elements on given step
+if step is positive move right, else move left
+```
+move([1, 2, 3, 4, 5], 2) // [4, 5, 1, 2, 3]
+move([1, 2, 3, 4, 5], -2) // [3, 4, 5, 1, 2]
 
+function move(arr, step) {
+  step = step % arr.length
+  return arr.slice(-step).concat(arr.slice(0, -step))
+}
+```
+
+### Get all letters and their count
+
+```
+getChars('Saratov') // 's:*, a:**, r:*, t:*, o:*, v:*'
+getChars('Saint Petersburg') // 's:**, a:*, i:*, n:*, t:**, p:*, e:**, r:**, b:*, u:*, g:*'
+
+function getChars(city) {
+  const arr = city.replace(/[^a-zA-Zs]/g, "").split('').map(i => i.toLowerCase())
+  const obj = {}
+  for(let i of arr) {
+    obj[i] ? obj[i] += 1 : obj[i] = 1
+  }
+  const unique = [...new Set(arr)]
+  return unique.map((i, index) => `${i}:${'*'.repeat(obj[i])}${index !== unique.length - 1 ? ',' : ''}`).join(' ')
+}
+```
 
