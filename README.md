@@ -262,3 +262,27 @@ function getChars(city) {
 }
 ```
 
+### Reverse array
+If it starts with odd number reversed should start also with odd number
+``` 
+sort([1, 2, 3, 4, 5, 6, 7, 8]) // [7, 8, 5, 6, 3, 4, 1, 2]
+sort([2, 3, 4, 5, 6]) // [6, 5, 4, 3, 2]
+sort([2, 3, 4, 5, 6, 7]) // [6, 7, 4, 5, 2, 3]
+
+function sort(arr: Array<number>): Array<number> {
+    // if elements length is odd just reverse it 
+    if(arr.length % 2 !== 0) {
+        return arr.reverse()
+    }
+    const result = [...arr]
+    for(let i = 0; i < arr.length / 2; i++) {
+        const secondIndex = i % 2 === 0 
+            ? result.length - 2 - i
+            : result.length - i;
+        [result[i], result[secondIndex]] = [result[secondIndex], result[i]]    
+    }
+    return result
+}
+```
+
+
