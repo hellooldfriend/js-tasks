@@ -38,23 +38,14 @@ function atm(sum, limits) {
 ```
 orderedCount('abracadabra') // [['a', 5], ['b', 2], ['r', 2], ['c', 1], ['d', 1]]
 
-// TODO: write more better solution
 function orderedCount(str) {
-    let obj = {}
-    let array = str.split('')
-    let unique = []
-
-    for(let i of array) {
-        if(!unique.includes(i)) {
-            unique.push(i)
-        }
-        if(!obj[i]) {
-            obj[i] = 1
-        } else {
-            obj[i] += 1
-        }
-    }
-    return unique.map(i => [i, obj[i]])
+  const array = str.split('')
+  const obj = array.reduce((acc, value) => {
+    acc[value] ? acc[value] += 1 : acc[value] = 1
+    return acc
+  }, {})
+  const unique = [...new Set(array)]
+  return unique.map(i => [i, obj[i]])  
 }
 ```
 
